@@ -1,6 +1,6 @@
 // Bird.java
-// D. Singletary
-// 3/15/25
+// Amanda Perron
+// August 2nd 2026
 // Represents a bird base class
 
 package edu.fscj.cop2800c.penguin;
@@ -15,8 +15,22 @@ public class Bird implements Comparable<Bird> {
     private String sex;
 
     // Constructor
-    public Bird(int sampleNum, double culmenLength, 
-                double culmenDepth, double bodyMass, String sex) {
+    public Bird(int sampleNum, double culmenLength,
+                double culmenDepth, double bodyMass,
+                String sex)
+                throws InvalidBirdDataException {
+
+        if (sampleNum < 0 ||
+            culmenLength < 0 ||
+            culmenDepth < 0 ||
+            bodyMass < 0 ||
+            sex == null ||
+            sex.isEmpty()) {
+
+            throw new InvalidBirdDataException(
+                "Invalid Bird data encountered.");
+        }
+
         this.sampleNum = sampleNum;
         this.culmenLength = culmenLength;
         this.culmenDepth = culmenDepth;
@@ -48,29 +62,45 @@ public class Bird implements Comparable<Bird> {
     // base class toString (override)
     @Override
     public String toString() {
-        String retStr = 
-           "sampleNum=" + sampleNum +
-           ", culmenLength=" + culmenLength +
-           ", culmenDepth=" + culmenDepth +
-           ", bodyMass=" + bodyMass +
-           ", sex='" + sex;
+        String retStr =
+            "sampleNum=" + sampleNum +
+            ", culmenLength=" + culmenLength +
+            ", culmenDepth=" + culmenDepth +
+            ", bodyMass=" + bodyMass +
+            ", sex='" + sex;
         return retStr;
     }
-    
+
     // base class compareTo (override)
     @Override
     public int compareTo(Bird other) {
-        int result = Integer.compare(this.sampleNum, other.sampleNum);
-        if (result != 0) return result;
+        int result =
+            Integer.compare(this.sampleNum, other.sampleNum);
 
-        result = Double.compare(this.culmenLength, other.culmenLength);
-        if (result != 0) return result;
+        if (result != 0) {
+            return result;
+        }
 
-        result = Double.compare(this.culmenDepth, other.culmenDepth);
-        if (result != 0) return result;
+        result = Double.compare(this.culmenLength,
+                                other.culmenLength);
 
-        result = Double.compare(this.bodyMass, other.bodyMass);
-        if (result != 0) return result;
+        if (result != 0) {
+            return result;
+        }
+
+        result = Double.compare(this.culmenDepth,
+                                other.culmenDepth);
+
+        if (result != 0) {
+            return result;
+        }
+
+        result = Double.compare(this.bodyMass,
+                                other.bodyMass);
+
+        if (result != 0) {
+            return result;
+        }
 
         return this.sex.compareTo(other.sex);
     }

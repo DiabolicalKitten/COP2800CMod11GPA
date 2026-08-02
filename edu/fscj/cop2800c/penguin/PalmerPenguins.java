@@ -1,6 +1,6 @@
 // PalmerPenguins.java
-// D. Singletary
-// 3/14/25
+// Amanda Perron
+// August 2nd 2026
 // Palmer Penguins application
 
 package edu.fscj.cop2800c.penguin;
